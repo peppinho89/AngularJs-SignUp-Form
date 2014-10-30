@@ -1,0 +1,11 @@
+.ng-valid {
+    border-color: green;
+    outline-color: green;
+}
+
+.messages {
+  font-size: smaller;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  color: red;
+}
