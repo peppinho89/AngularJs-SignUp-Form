@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html ng-app="validation">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://code.angularjs.org/1.3.0-rc.2/angular.js"></script>
+    <script src="https://code.angularjs.org/1.3.0-rc.2/angular-messages.js"></script>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+</head>
+<body class="container" ng-controller="RegistrationController as registration">
+    <h1>Sign Up!</h1>
+    <h3>{{ registration.message }}</h3>
+    <form name="registrationForm" novalidate
+          ng-submit="registration.submit(registrationForm.$valid)">
+        <div class="form-group" validate-form>
+            <label>User Name</label><span class="isRequired">*</span>
+            <input type="text" name="username" class="form-control" ng-model="registration.user.username" required ng-minlength="4" />
+            <div ng-if="registrationForm.username.$invalid && !registrationForm.username.$pristine" ng-messages="registrationForm.username.$error" ng-messages-include="messages.html"></div>
+        </div>
+        <div class="form-group" validate-form>
+            <label>Password</label><span class="isRequired">*</span>
+            <input type="password" name="password" class="form-control" ng-model="registration.user.password" required />
+            <div ng-if="registrationForm.password.$invalid && !registrationForm.password.$pristine" ng-messages="registrationForm.password.$error" ng-messages-include="messages.html"></div>
+        </div>
+        <div class="form-group" validate-form>
+            <label>Confirm Password</label><span class="isRequired">*</span>
+            <input type="password" name="confirmPassword" class="form-control"
+                   ng-model="registration.user.confirmPassword"
+                   required compare-to="registration.user.password" />
+            <div ng-if="registrationForm.confirmPassword.$invalid && !registrationForm.confirmPassword.$pristine" ng-messages="registrationForm.confirmPassword.$error" ng-messages-include="messages.html"></div>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" ng-disabled="!registrationForm.$valid">Register!</button>
+        </div>
+    </form>
+</body>
+</html>
